@@ -46,15 +46,14 @@ namespace Budusan_Bogdan_Cristian_Lab2.Migrations
                     Price = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     PublishingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PublisherID = table.Column<int>(type: "int", nullable: true),
-                    AuthorID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthorID1 = table.Column<int>(type: "int", nullable: true)
+                    AuthorID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Book", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Book_Author_AuthorID1",
-                        column: x => x.AuthorID1,
+                        name: "FK_Book_Author_AuthorID",
+                        column: x => x.AuthorID,
                         principalTable: "Author",
                         principalColumn: "ID");
                     table.ForeignKey(
@@ -65,9 +64,9 @@ namespace Budusan_Bogdan_Cristian_Lab2.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_AuthorID1",
+                name: "IX_Book_AuthorID",
                 table: "Book",
-                column: "AuthorID1");
+                column: "AuthorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Book_PublisherID",

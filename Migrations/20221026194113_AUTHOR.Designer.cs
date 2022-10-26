@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Budusan_Bogdan_Cristian_Lab2.Migrations
 {
     [DbContext(typeof(Budusan_Bogdan_Cristian_Lab2Context))]
-    [Migration("20221026184326_AUTHOR")]
+    [Migration("20221026194113_AUTHOR")]
     partial class AUTHOR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,10 +53,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("AuthorID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AuthorID1")
+                    b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -74,7 +71,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorID1");
+                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -102,7 +99,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Migrations
                 {
                     b.HasOne("Budusan_Bogdan_Cristian_Lab2.Models.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorID1");
+                        .HasForeignKey("AuthorID");
 
                     b.HasOne("Budusan_Bogdan_Cristian_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")

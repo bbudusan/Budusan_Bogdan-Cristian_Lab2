@@ -27,7 +27,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
             {
                 Book = await _context.Book
                 .Include(b => b.Publisher)
-                .Include(b => b.Author)
+                .Include(c => c.Author)
                 .ToListAsync();
             }
         }

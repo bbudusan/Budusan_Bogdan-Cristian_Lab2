@@ -22,7 +22,8 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
         public IActionResult OnGet()
         {
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID","PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID","FirstName","LastName");
+            ViewData["AuthorID1"] = new SelectList(_context.Set<Author>(), "ID","FirstName");
+            ViewData["AuthorID2"] = new SelectList(_context.Set<Author>(), "ID","LastName");
 
             return Page();
         }
