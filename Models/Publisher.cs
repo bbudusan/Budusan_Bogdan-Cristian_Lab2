@@ -4,7 +4,7 @@
     {
         public int ID { get; set; }
         public string PublisherName { get; set; }
-        public ICollection<Book>? Booksss { get; set; } //navigation property
+        public ICollection<Book>? Books { get; set; } //navigation property
     }
 
 }
