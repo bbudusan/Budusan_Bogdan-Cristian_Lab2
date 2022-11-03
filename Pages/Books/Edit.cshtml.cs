@@ -32,6 +32,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
             }
 
             Book = await _context.Book
+                .Include(b => b.Author)
                  .Include(b => b.Publisher)
                  .Include(b => b.BookCategories).ThenInclude(b => b.Category)
                  .AsNoTracking()
@@ -40,13 +41,16 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
             {
                 return NotFound();
             }
+
+
             PopulateAssignedCategoryData(_context, Book);
 
-            var authorList = _context.Author.Select(x => new
+            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+            if (book == null)
             {
-                x.ID,
-                FullName = x.LastName + " " + x.FirstName
-            });
+                return NotFound();
+            }
+            Book = book;
 
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID","PublisherName");
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
@@ -64,7 +68,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
                 return NotFound();
             }
             var bookToUpdate = await _context.Book
-            .Include(i => i.Author)
+             .Include(i => i.Author)
             .Include(i => i.Publisher)
             .Include(i => i.BookCategories)
             .ThenInclude(i => i.Category)
@@ -73,7 +77,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
             {
                 return NotFound();
             }
-            if (await TryUpdateModelAsync<Book>(
+           if (await TryUpdateModelAsync<Book>(
             bookToUpdate,
             "Book",
             i => i.Title, i => i.AuthorID,
@@ -83,6 +87,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
+            
             //Apelam UpdateBookCategories pentru a aplica informatiile din checkboxuri la entitatea Books care
             //este editata
             UpdateBookCategories(_context, selectedCategories, bookToUpdate);
