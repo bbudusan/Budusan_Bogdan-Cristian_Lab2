@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Budusan_Bogdan_Cristian_Lab2.Migrations
 {
     [DbContext(typeof(Budusan_Bogdan_Cristian_Lab2Context))]
-    [Migration("20221029201120_BookCategory")]
+    [Migration("20221101210752_BookCategory")]
     partial class BookCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

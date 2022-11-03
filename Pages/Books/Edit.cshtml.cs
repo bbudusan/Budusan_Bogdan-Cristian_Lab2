@@ -64,6 +64,7 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
                 return NotFound();
             }
             var bookToUpdate = await _context.Book
+            .Include(i => i.Author)
             .Include(i => i.Publisher)
             .Include(i => i.BookCategories)
             .ThenInclude(i => i.Category)
@@ -75,8 +76,8 @@ namespace Budusan_Bogdan_Cristian_Lab2.Pages.Books
             if (await TryUpdateModelAsync<Book>(
             bookToUpdate,
             "Book",
-            i => i.Title, i => i.Author,
-            i => i.Price, i => i.PublishingDate, i => i.Publisher))
+            i => i.Title, i => i.AuthorID,
+            i => i.Price, i => i.PublishingDate, i => i.PublisherID))
             {
                 UpdateBookCategories(_context, selectedCategories, bookToUpdate);
                 await _context.SaveChangesAsync();
